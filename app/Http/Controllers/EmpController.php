@@ -112,11 +112,26 @@ class EmpController extends Controller {
             }*/
             
             if(!empty($insert_data)) {
-                foreach ($insert_data as $array) {
+                /*foreach ($insert_data as $array) {
                     DB::table('emps')
                     ->where('empId', $row['employee_number'])
                     ->update($array);
-                }
+                }*/
+                
+                Emp::updateOrCreate(
+                    [
+                        'empId' => $row['employee_number']
+                    ],
+                    [
+                        'empId'  => $row['employee_number'],
+                        'name'   => $row['first_name'],
+                        'surname'  => $row['surname'],
+                        'dob'   => $row['date_of_birth'],
+                        //'position'  => $row['position'],
+                        //'start_date'  => $row['date'],
+                        'salary'   => $row['annual_salary']
+                    ]
+                    );      
                 
                 
             }
